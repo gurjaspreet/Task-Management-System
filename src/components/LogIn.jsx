@@ -57,7 +57,8 @@ export default function LogIn(props) {
 
                 <button className="mx-auto my-6 bg-[#10B981] hover:bg-green-900 rounded-sm w-fit text-white px-6 py-2 transform hover:scale-110 duration-500 ease-in-out" onClick={submit}>Login</button>
 
-                <p className="text-center text-white">Have an account? <a className="text-green-500" href="#" onClick={props.toggleHasAccount}>Login instead</a></p>
+                <p className="text-center text-white">Don't have an account yet?</p> 
+                <a className="text-center text-green-500" href="#" onClick={props.toggleHasAccount}>Sign up instead</a>
             </form>
         </div>
     )
