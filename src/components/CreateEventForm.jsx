@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {v4 as uuidv4} from "uuid";
 import closeBtn from "../assets/close-icon.png"
 
 export default function CreateEventForm(props) {
@@ -35,7 +36,8 @@ export default function CreateEventForm(props) {
             return;
         }
 
-        props.setEvents(prevEvents => [formData, ...prevEvents])
+        const newEvent = { ...formData, id: uuidv4() };
+        props.setEvents(prevEvents => [newEvent, ...prevEvents])
         setFormData({
             name: "",
             venue: "",

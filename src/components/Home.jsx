@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import { v4 as uuidv4} from "uuid";
 import CreateEventForm from "./CreateEventForm";
 import Event from "./Event";
 
 export default function Home() {
     const [events, setEvents] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const createEvent = (event) => {
-        event.preventDefault();
-    }
 
     function loadCreateEventForm() {
         setIsModalOpen(true);
@@ -40,8 +35,8 @@ export default function Home() {
                         </div>
                         <div className="my-5 h-[50vh] w-[600px] overflow-y-auto">
                             {events.map(eventDetails => <Event
-                                key={uuidv4()}
-                                id={uuidv4()}
+                                key={eventDetails.id}
+                                id={eventDetails.id}
                                 name={eventDetails.name}
                                 venue={eventDetails.venue}
                                 date={eventDetails.date}

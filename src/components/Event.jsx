@@ -1,5 +1,6 @@
 import React from "react";
 import deleteBtn from "../assets/delete.png";
+
 export default function Event(props) {
     return(
         <div className="flex justify-center items-center mt-4">
@@ -17,7 +18,7 @@ export default function Event(props) {
                     <p>{props.time}</p>
                 </div>
                 <div className="w-15 p-1 mx-1 rounded-sm text-black">
-                    <img src={deleteBtn} alt="delete" className="w-10 hover:scale-125 duration-500" onClick={() => props.deleteEvent(id)}
+                    <img src={deleteBtn} alt="delete" className="w-10 hover:scale-125 duration-500" onClick={() => props.deleteEvent(props.id)}
                     />
                 </div>
             </div>
