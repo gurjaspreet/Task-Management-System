@@ -10,6 +10,24 @@ export default function Home() {
         setIsModalOpen(true);
     }
 
+    const sortEventsByName = () => {
+        setEvents(prevEvents => [...prevEvents].sort((a, b) => a.name.localeCompare(b.name)));
+    }
+
+    const sortEventsByVenue = () => {
+        setEvents(prevEvents => [...prevEvents].sort((a, b) => a.venue.localeCompare(b.venue)));
+    }
+
+    const sortEventsByDateTime = () => {
+        setEvents(prevEvents => 
+            [...prevEvents].sort((a, b) => {
+                const dateTimeA = new Date(`${a.date}T${a.time}`);
+                const dateTimeB = new Date(`${b.date}T${b.time}`);
+                return dateTimeA - dateTimeB;
+            })
+        );
+    }
+
     const deleteEvent = (id) => {
         setEvents(events.filter(event => event.id !== id));
     }
@@ -19,7 +37,6 @@ export default function Home() {
             {
                 events.length === 0 ?
                     <div className="h-[80vh] flex flex-col justify-center items-center">
-
                         <p>No events found!</p>
                         <button
                             onClick={loadCreateEventForm} 
@@ -29,11 +46,16 @@ export default function Home() {
                     </div>
                     :
                     <div className="mx-80 my-20 flex flex-col justify-center items-center">
-                        <div className="w-[600px] flex justify-around items-center">
-                            <h1>Events: </h1>
-                            <button onClick={loadCreateEventForm} className="bg-[#10B981] hover:bg-green-900 rounded-sm w-fit text-white px-6 py-2 transform hover:scale-110 duration-500 ease-in-out">Create Event</button>
+                        <div className="w-[800px] flex justify-around items-center">
+                            <h1 className="text-3xl">Events: </h1>
+                            <div>
+                                <button onClick={loadCreateEventForm} className="bg-[#10B981] hover:bg-green-900 rounded-sm w-fit text-white px-6 py-2 mx-2 transform hover:scale-110 duration-500 ease-in-out">Create Event</button>
+                                <button onClick={sortEventsByName} className="bg-blue-500 hover:bg-blue-700 rounded-sm w-fit text-white px-4 py-2 mx-2 transform hover:scale-110 duration-500 ease-in-out">Sort by Name</button>
+                                <button onClick={sortEventsByVenue} className="bg-blue-500 hover:bg-blue-700 rounded-sm w-fit text-white px-4 py-2 mx-2 transform hover:scale-110 duration-500 ease-in-out">Sort by Venue</button>
+                                <button onClick={sortEventsByDateTime} className="bg-blue-500 hover:bg-blue-700 rounded-sm w-fit text-white px-4 py-2 mx-2 transform hover:scale-110 duration-500 ease-in-out">Sort by Date & Time</button>
+                            </div>
                         </div>
-                        <div className="my-5 h-[50vh] w-[600px] overflow-y-auto">
+                        <div className="my-5 h-[50vh] w-[800px] overflow-y-auto">
                             {events.map(eventDetails => <Event
                                 key={eventDetails.id}
                                 id={eventDetails.id}
