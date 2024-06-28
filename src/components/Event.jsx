@@ -1,5 +1,6 @@
 import React from "react";
 import deleteBtn from "../assets/delete.png";
+import editBtn from "../assets/pen.png";
 
 export default function Event(props) {
     return(
@@ -9,13 +10,23 @@ export default function Event(props) {
                     <p>{props.name}</p>
                 </div>
                 <div className="w-36 bg-[#00ffe0] p-2 mx-2 rounded-sm text-center flex justify-center items-center text-black">
-                    <p>{props.venue}</p
-                ></div>
+                    <p>{props.venue}</p>
+                </div>
                 <div className="w-36 bg-[#00ffe0] p-2 mx-2 rounded-sm text-center flex justify-center items-center text-black">
                     <p>{props.date}</p>
                 </div>
                 <div className="w-36 bg-[#00ffe0] p-2 mx-2 rounded-sm text-center flex justify-center items-center text-black">
                     <p>{props.time}</p>
+                </div>
+                <div className="flex justify-center items-center w-15 p-1 mx-1 rounded-sm text-black">
+                    <img src={editBtn} alt="edit" className="w-10 hover:scale-125 duration-500" onClick={() => props.editEvent({
+                        id: props.id,
+                        name: props.name,
+                        venue: props.venue,
+                        date: props.date,
+                        time: props.time
+                    })}
+                    />
                 </div>
                 <div className="flex justify-center items-center w-15 p-1 mx-1 rounded-sm text-black">
                     <img src={deleteBtn} alt="delete" className="w-10 hover:scale-125 duration-500" onClick={() => props.deleteEvent(props.id)}

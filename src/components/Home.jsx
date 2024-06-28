@@ -5,9 +5,19 @@ import Event from "./Event";
 export default function Home() {
     const [events, setEvents] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentEvent, setCurrentEvent] = useState(null);
 
     function loadCreateEventForm() {
         setIsModalOpen(true);
+        setIsEditing(false);
+        setCurrentEvent(null);
+    }
+
+    function loadEditEventForm(event) {
+        setIsModalOpen(true);
+        setIsEditing(true);
+        setCurrentEvent(event);
     }
 
     const sortEventsByName = () => {
@@ -46,7 +56,7 @@ export default function Home() {
                     </div>
                     :
                     <div className="mx-80 my-20 flex flex-col justify-center items-center">
-                        <div className="w-[800px] flex justify-around items-center">
+                        <div className="w-[800px] mb-6 flex justify-around items-center">
                             <h1 className="text-3xl">Events: </h1>
                             <div>
                                 <button onClick={loadCreateEventForm} className="bg-[#10B981] hover:bg-green-900 rounded-sm w-fit text-white px-6 py-2 mx-2 transform hover:scale-110 duration-500 ease-in-out">Create Event</button>
@@ -64,6 +74,7 @@ export default function Home() {
                                 date={eventDetails.date}
                                 time={eventDetails.time}
                                 deleteEvent={deleteEvent}
+                                editEvent={loadEditEventForm}
                             />)}
                         </div>
                     </div>
@@ -71,9 +82,16 @@ export default function Home() {
 
             {/* remove events if not used */}
             {
-                isModalOpen && <CreateEventForm events={events} setEvents={setEvents} setIsModalOpen={setIsModalOpen} blurFunction={() => {
-                    setIsModalOpen(false);
-                }}/>
+                isModalOpen && <CreateEventForm
+                    events={events}
+                    setEvents={setEvents}
+                    setIsModalOpen={setIsModalOpen}
+                    blurFunction={() => {
+                        setIsModalOpen(false);
+                    }}
+                    isEditing={isEditing}
+                    currentEvent={currentEvent}
+                />
             }
         </div>
     );
